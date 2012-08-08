@@ -7,7 +7,8 @@ package blazin.miha.soundrecord.components {
 	import flash.display.Sprite;
 
 	/**
-	 * Status header that display a message and animates it with three trailing dots in some cases
+	 * Status header that display a message and animates it with three trailing
+	 * dots if there is an ongoing activity.
 	 */
 	public class StatusHeader extends Sprite {
 		/**
@@ -20,7 +21,8 @@ package blazin.miha.soundrecord.components {
 		private var timer : Timer;
 
 		/**
-		 * Constructor creates a new instance. Other methods should be called after this instance has been added to the display list.
+		 * Constructor creates a new instance. Other methods should be called after this
+		 * instance has been added to the display list.
 		 */
 		public function StatusHeader() {
 			if (stage) init();
@@ -28,7 +30,7 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Set no microphone text
+		 * Sets no microphone text
 		 */
 		public function setNoMicrophone() : void {
 			label.text = "No Microphone";
@@ -36,10 +38,26 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Set ready text
+		 * Sets ready text
 		 */
 		public function setReady() : void {
 			label.text = "Ready";
+			timer.reset();
+		}
+
+		/**
+		 * Sets uploaded text
+		 */
+		public function setUploaded() : void {
+			label.text = "Uploaded!";
+			timer.reset();
+		}
+
+		/**
+		 * Sets upload failed text
+		 */
+		public function setUploadFailed() : void {
+			label.text = "Upload Failed!";
 			timer.reset();
 		}
 
@@ -71,23 +89,7 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Set ready text
-		 */
-		public function setUploaded() : void {
-			label.text = "Uploaded!";
-			timer.reset();
-		}
-
-		/**
-		 * Set upload failed text
-		 */
-		public function setUploadFailed() : void {
-			label.text = "Upload Failed!";
-			timer.reset();
-		}
-
-		/**
-		 * Initializes the status header when stage is available
+		 * Initializes the status header when the stage is available
 		 */
 		private function init(event : Event = null) : void {
 			removeEventListener(Event.ADDED_TO_STAGE, init);

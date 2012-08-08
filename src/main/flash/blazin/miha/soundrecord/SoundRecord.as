@@ -18,7 +18,7 @@ package blazin.miha.soundrecord {
 	import flash.utils.ByteArray;
 
 	/**
-	 * Main class of the Sound Record application. Sets up the stage and all other components. 
+	 * Main class of the SoundRecord application. Sets up the stage and all other components. 
 	 */
 	public class SoundRecord extends Sprite {
 		/**
@@ -26,23 +26,23 @@ package blazin.miha.soundrecord {
 		 */
 		private var statusHeader : StatusHeader;
 		/**
-		 * Button to start/stop recording
+		 * Button for starting and stopping the recording
 		 */
 		private var recordButton : RecordButton;
 		/**
-		 * Button to start/stop playback
+		 * Button for starting and stopping the playback
 		 */
 		private var playStopButton : SimpleButton;
 		/**
-		 * Button to discard recording
+		 * Button for discarding the recording
 		 */
 		private var clearButton : SimpleButton;
 		/**
-		 * Button to start upload to Sound Cloud
+		 * Button for starting the upload to SoundCloud
 		 */
 		private var uploadButton : SimpleButton;
 		/**
-		 * Container to hold play/clear/upload buttons
+		 * Container to hold the play/clear/upload buttons
 		 */
 		private var controlsContainer : Sprite;
 		/**
@@ -50,7 +50,7 @@ package blazin.miha.soundrecord {
 		 */
 		private var isRecording : Boolean;
 		/**
-		 * Status if currently playing recording
+		 * Status if currently playing
 		 */
 		private var isPlaying : Boolean;
 		/**
@@ -66,7 +66,7 @@ package blazin.miha.soundrecord {
 		 */
 		private var microphone : Microphone;
 		/**
-		 * Sound instance to playback recording
+		 * Sound instance used for playback
 		 */
 		private var sound : Sound = new Sound();
 		/**
@@ -74,7 +74,7 @@ package blazin.miha.soundrecord {
 		 */
 		private var channel : SoundChannel;
 		/**
-		 * Waveform instance to display wave form of recording
+		 * Waveform instance to display the waveform of the recording
 		 */
 		private var waveform : Waveform;
 		/**
@@ -82,7 +82,7 @@ package blazin.miha.soundrecord {
 		 */
 		private var soundCloudService : SoundCloudService;
 		/**
-		 * Authorization token for SoundCloud service
+		 * Authorization token for the SoundCloud service
 		 */
 		private var token : String = null;
 
@@ -166,7 +166,8 @@ package blazin.miha.soundrecord {
 		}
 
 		/**
-		 * Start upload button click handler, calls JavaScript to authorize the application
+		 * Start upload button click handler, calls JavaScript to start the user authorization
+		 * process
 		 */
 		private function startUpload(event : Event) : void {
 			if (token == null) {
@@ -199,7 +200,8 @@ package blazin.miha.soundrecord {
 		}
 
 		/**
-		 * Record button click handler. Starts or stop the recording of audio from the microphone. The user needs to first allow access to the camera
+		 * Record button click handler. Starts or stops the recording of audio from
+		 * the microphone. The user needs to first allow access to the microphone.
 		 */
 		private function toggleRecording(event : Event) : void {
 			if (isRecording) {
@@ -228,7 +230,9 @@ package blazin.miha.soundrecord {
 		}
 
 		/**
-		 * Called when sound data gets captured by the microphone. Also shows the recording UI because this is the most reliable way to determine if recording is happening
+		 * Called when sound data gets captured by the microphone. Also shows the recording
+		 * UI because this is the most reliable way to determine if the user allowed access
+		 * to the microphone.
 		 */
 		private function micSampleDataHandler(event : SampleDataEvent) : void {
 			if (!isRecording) {
@@ -246,7 +250,7 @@ package blazin.miha.soundrecord {
 		}
 
 		/**
-		 * Clear button click handler. Discards the recording
+		 * Clear button click handler. Discards the recording.
 		 */
 		private function clear(event : Event) : void {
 			controlsContainer.visible = false;
@@ -255,7 +259,7 @@ package blazin.miha.soundrecord {
 		}
 
 		/**
-		 * Play/Stop button click handler. Starts or stops the playback of the recording
+		 * Play button click handler. Starts or stops the playback.
 		 */
 		private function togglePlayback(event : Event = null) : void {
 			if (isPlaying) {
@@ -305,7 +309,7 @@ package blazin.miha.soundrecord {
 		}
 
 		/**
-		 * On Enter Frame handler called to update the playhead on the waveform
+		 * On EnterFrame handler called to update the playhead position on the waveform
 		 */
 		private function onFrame(event : Event) : void {
 			var soundLength : Number = ((soundBytes.length / 4) / 44100);

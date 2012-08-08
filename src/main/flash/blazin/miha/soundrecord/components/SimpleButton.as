@@ -15,7 +15,8 @@ package blazin.miha.soundrecord.components {
 		private var label : TextField;
 
 		/**
-		 * Constructor creates a new instace. Other methods should be called after this instance has been added to the display list.
+		 * Constructor creates a new instace. Other methods should be called after this
+		 * instance has been added to the display list.
 		 */
 		public function SimpleButton() {
 			if (stage) init();
@@ -23,7 +24,7 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Sets button label text
+		 * Sets the button label text
 		 * @param text Text to show
 		 */
 		public function setLabel(text : String) : void {
@@ -31,7 +32,8 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Enable or disables the button. Disabled state sets the alpha to 0.5 and disables mouse events
+		 * Enables or disables the button. Disabled state sets the alpha to 0.5 and
+		 * disables mouse events
 		 * @param enabled Whether to enable or disable the button
 		 */
 		public function setEnabled(enabled : Boolean) : void {
@@ -45,7 +47,7 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Initializes simple button when stage is available
+		 * Initializes simple button when the stage is available
 		 */
 		private function init(event : Event = null) : void {
 			label = new TextField();

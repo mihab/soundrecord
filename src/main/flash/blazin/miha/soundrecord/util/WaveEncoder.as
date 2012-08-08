@@ -3,7 +3,7 @@ package blazin.miha.soundrecord.util {
 	import flash.utils.Endian;
 
 	/**
-	 * Helper class used for converting microphone data to the wave file format
+	 * Helper class used for converting microphone data to the wave file format.
 	 * Original work from Thibault Imbert
 	 * @see http://www.bytearray.org/?p=1858
 	 */
@@ -20,7 +20,7 @@ package blazin.miha.soundrecord.util {
 		 * @param samples Microphone sample data
 		 * @param channels Number of channels
 		 * @param bits Size of sample in bits
-		 * @param rate Samples rate per second
+		 * @param rate Sample rate per second
 		 * @return ByteArray in WAVE file format
 		 */
 		public function encode(samples : ByteArray, channels : int = 2, bits : int = 16, rate : int = 44100) : ByteArray {

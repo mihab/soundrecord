@@ -14,7 +14,8 @@ package blazin.miha.soundrecord.service {
 	import flash.utils.ByteArray;
 
 	/**
-	 * Class to use for connecting to the SoundCloud service. Dispatches events of type: UPLOAD_COMPLETE, UPLOAD_FAILED
+	 * Class to use for connecting to the SoundCloud service. Dispatches events of type:
+	 * UPLOAD_COMPLETE, UPLOAD_FAILED
 	 */
 	public class SoundCloudService extends EventDispatcher {
 		/**
@@ -26,7 +27,8 @@ package blazin.miha.soundrecord.service {
 		 */
 		public static const UPLOAD_FAILED : String = "uploadFailed";
 		/**
-		 * WAVE encoder used for encoding microphone data into the WAVE file format required by the server
+		 * WAVE encoder used for encoding microphone data into the WAVE file format
+		 * required by the server
 		 */
 		private var waveEncoder : WaveEncoder;
 		/**
@@ -51,14 +53,14 @@ package blazin.miha.soundrecord.service {
 		}
 
 		/**
-		 * Return the last results of a successful response from the server, or null
+		 * Returns the last result of a successful response from the server, or null
 		 */
 		public function getLastResult() : Object {
 			return lastResult;
 		}
 
 		/**
-		 * Uploads recorded song to the SoundCloud service
+		 * Uploads the recorded song to the SoundCloud service
 		 * @param token The authorization token to use
 		 * @param soundBytes Sound bytes captured by the microphone (MONO)
 		 */

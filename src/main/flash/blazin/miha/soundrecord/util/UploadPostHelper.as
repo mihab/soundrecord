@@ -3,7 +3,8 @@ package blazin.miha.soundrecord.util {
 	import flash.utils.Endian;
 
 	/**
-	 * Helper class used for converting a fileName, byteArray, and parameters object into a suitable ByteArrray for a UrlRequest
+	 * Helper class used for converting a fileName, byteArray, and parameters
+	 * object into a suitable ByteArrray for a UrlRequest.
 	 * Original work from Jonathan Marston
 	 * @see http://marstonstudio.com/?p=36
 	 */

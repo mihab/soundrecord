@@ -4,7 +4,8 @@ package blazin.miha.soundrecord.components {
 	import flash.display.Sprite;
 
 	/**
-	 * Simple waveform to display the wave form of the recorded sound. Also display a playhead if the setPlayHeadPercentage is called while play the recording
+	 * Simple waveform to display the waveform of the recorded sound. Also displays
+	 * a playhead which position should be set using the setPlayHeadPercentage method.
 	 */
 	public class Waveform extends Sprite {
 		/**
@@ -21,7 +22,8 @@ package blazin.miha.soundrecord.components {
 		private var currentPercentage : int;
 
 		/**
-		 * Creates a new instance. Other methods should be called after this instance has been added to the display list.
+		 * Creates a new instance. Other methods should be called after this
+		 * instance has been added to the display list.
 		 */
 		public function Waveform() {
 			if (stage) init();
@@ -29,10 +31,14 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Draws the waveform given the recording sounds. Stretches the wave form to stage.stageWidth.
+		 * Draws the waveform given the recorded sound. Stretches the waveform to stage.stageWidth.
+		 * If stretchSignal is set to true, the signal height is stretched to a maximum of the
+		 * waveform height. The precision parameter defines the number of lines to draw per 
+		 * pixel. The higher the value, the more precise the waveform but the slower the performance
+		 * as more lines get drawn per pixel.
 		 * @param bytes Bytes recorded by the microphone
-		 * @param stretchSignal Whether to stretch the signal or not. A stretched signal looks for the max value and multiplies it and other values to 1
-		 * @param precision Number of lines to draw per pixel. The higher the value, the more precise the wave form but slows down performance as it takes longer to draw
+		 * @param stretchSignal Whether to stretch the signal height or not
+		 * @param precision Number of lines to draw per pixel.
 		 */
 		public function draw(bytes : ByteArray, stretchSignal : Boolean = true, precision : int = 10) : void {
 			if (canvas != null) {
@@ -98,8 +104,8 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Moves the playhead line to match the percentage
-		 * @param percentage Percentage of recording the current playhead is at
+		 * Moves the playhead to match the percentage
+		 * @param percentage Percentage of recording the current playback is at
 		 */
 		public function setPlayHeadPercentage(percentage : Number) : void {
 			playHead.x = (percentage * stage.stageWidth) / 100;
@@ -107,7 +113,7 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Initializes the wave form when stage is available
+		 * Initializes the waveform when the stage is available
 		 */
 		private function init(event : Event = null) : void {
 			playHead = new Sprite();
@@ -119,7 +125,7 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Stage resize handler, adjusts scales the waveform if present and adjusts the playhead 
+		 * Stage resize handler, scales the waveform and repositions the playhead 
 		 */
 		private function resize(event : Event) : void {
 			if (canvas != null) {

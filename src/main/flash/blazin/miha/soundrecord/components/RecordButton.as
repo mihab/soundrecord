@@ -23,7 +23,8 @@ package blazin.miha.soundrecord.components {
 		private var downSprite : Sprite;
 
 		/**
-		 * Constructor creates a new instace. Other methods should be called after this instance has been added to the display list.
+		 * Constructor creates a new instace. Other methods should be called after this
+		 * instance has been added to the display list.
 		 */
 		public function RecordButton() {
 			if (stage) init();
@@ -31,7 +32,7 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Chane label from recording to stop or reverse
+		 * Change label from recording to stop or reverse
 		 * @param recording Whether recording or not
 		 */
 		public function changeLabel(recording : Boolean) : void {
@@ -40,8 +41,9 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Enable or disables the button. Disabled state sets the alpha to 0.5 and disables mouse events
-		 * @param enabled Whether to enable or disable record button
+		 * Enables or disables the button. Disabled state sets the alpha to 0.5 and
+		 * disables mouse events
+		 * @param enabled Whether to enable or disable the record button
 		 */
 		public function setEnabled(enabled : Boolean) : void {
 			if (enabled) {
@@ -54,7 +56,7 @@ package blazin.miha.soundrecord.components {
 		}
 
 		/**
-		 * Initializes record button when stage is available
+		 * Initializes record button when the stage is available
 		 */
 		private function init(event : Event = null) : void {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
