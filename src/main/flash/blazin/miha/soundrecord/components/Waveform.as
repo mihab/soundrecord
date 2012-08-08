@@ -11,6 +11,14 @@ package blazin.miha.soundrecord.components {
 		 * Playhead sprite that displays a simple red line
 		 */
 		private var playHead : Sprite;
+		/**
+		 * Container Sprite to draw waveform on
+		 */
+		private var canvas : Sprite;
+		/**
+		 * The current playhead percentage
+		 */
+		private var currentPercentage : int;
 
 		/**
 		 * Creates a new instance. Other methods should be called after this instance has been added to the display list.
@@ -27,14 +35,19 @@ package blazin.miha.soundrecord.components {
 		 * @param precision Number of lines to draw per pixel. The higher the value, the more precise the wave form but slows down performance as it takes longer to draw
 		 */
 		public function draw(bytes : ByteArray, stretchSignal : Boolean = true, precision : int = 10) : void {
-			graphics.clear();
-			graphics.lineStyle(0, 0x000000);
-			graphics.moveTo(0, 0);
-			graphics.lineTo(stage.stageWidth, 0);
-			graphics.lineTo(stage.stageWidth, 100);
-			graphics.lineTo(0, 100);
-			graphics.lineTo(0, 0);
-			graphics.moveTo(0, 50);
+			if (canvas != null) {
+				removeChild(canvas);
+			}
+			canvas = new Sprite();
+			addChildAt(canvas, 0);
+			canvas.graphics.clear();
+			canvas.graphics.lineStyle(0, 0x000000);
+			canvas.graphics.moveTo(0, 0);
+			canvas.graphics.lineTo(stage.stageWidth, 0);
+			canvas.graphics.lineTo(stage.stageWidth, 100);
+			canvas.graphics.lineTo(0, 100);
+			canvas.graphics.lineTo(0, 0);
+			canvas.graphics.moveTo(0, 50);
 			var delta : Number = stage.stageWidth / (bytes.bytesAvailable / 4);
 			var currentX : Number = 0;
 			var currentDrawPoint : int = 0;
@@ -79,7 +92,7 @@ package blazin.miha.soundrecord.components {
 					} else {
 						sample = sample * 50;
 					}
-					graphics.lineTo(currentX, 50 + sample);
+					canvas.graphics.lineTo(currentX, 50 + sample);
 				}
 			}
 		}
@@ -89,7 +102,8 @@ package blazin.miha.soundrecord.components {
 		 * @param percentage Percentage of recording the current playhead is at
 		 */
 		public function setPlayHeadPercentage(percentage : Number) : void {
-			playHead.x = (percentage * width) / 100;
+			playHead.x = (percentage * stage.stageWidth) / 100;
+			currentPercentage = percentage;
 		}
 
 		/**
@@ -101,6 +115,17 @@ package blazin.miha.soundrecord.components {
 			playHead.graphics.drawRect(0, 0, 1, 100);
 			playHead.graphics.endFill();
 			addChild(playHead);
+			stage.addEventListener(Event.RESIZE, resize);
+		}
+
+		/**
+		 * Stage resize handler, adjusts scales the waveform if present and adjusts the playhead 
+		 */
+		private function resize(event : Event) : void {
+			if (canvas != null) {
+				canvas.width = stage.stageWidth;
+			}
+			setPlayHeadPercentage(currentPercentage);
 		}
 	}
 }

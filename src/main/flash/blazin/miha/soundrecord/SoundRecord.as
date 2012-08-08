@@ -103,11 +103,9 @@ package blazin.miha.soundrecord {
 			stage.align = StageAlign.TOP_LEFT;
 			statusHeader = new StatusHeader();
 			addChild(statusHeader);
-			statusHeader.x = stage.stageWidth / 2 - statusHeader.width / 2;
 			recordButton = new RecordButton();
 			addChild(recordButton);
 			recordButton.y = 50;
-			recordButton.x = stage.stageWidth / 2 - recordButton.width / 2;
 			controlsContainer = new Sprite();
 			controlsContainer.y = recordButton.height + recordButton.y + 5;
 			playStopButton = new SimpleButton();
@@ -122,7 +120,6 @@ package blazin.miha.soundrecord {
 			uploadButton.setLabel("UPLOAD");
 			clearButton.x = playStopButton.width + 5;
 			uploadButton.x = playStopButton.width + 5 + clearButton.width + 5;
-			controlsContainer.x = stage.stageWidth / 2 - controlsContainer.width / 2;
 			waveform = new Waveform();
 			waveform.y = controlsContainer.y + controlsContainer.height + 5;
 			addChild(waveform);
@@ -131,13 +128,27 @@ package blazin.miha.soundrecord {
 			recordButton.addEventListener(MouseEvent.CLICK, toggleRecording, false, 0, true);
 			clearButton.addEventListener(MouseEvent.CLICK, clear, false, 0, true);
 			playStopButton.addEventListener(MouseEvent.CLICK, togglePlayback, false, 0, true);
+			soundCloudService = new SoundCloudService();
+			soundCloudService.addEventListener(SoundCloudService.UPLOAD_COMPLETE, uploadComplete);
+			soundCloudService.addEventListener(SoundCloudService.UPLOAD_FAILED, uploadFailed);
+			stage.addEventListener(Event.RESIZE, resize, false, 0, true);
+			resize();
 			if (ExternalInterface.available) {
 				ExternalInterface.addCallback("upload", upload);
 				uploadButton.addEventListener(MouseEvent.CLICK, startUpload, false, 0, true);
 			}
-			soundCloudService = new SoundCloudService();
-			soundCloudService.addEventListener(SoundCloudService.UPLOAD_COMPLETE, uploadComplete);
-			soundCloudService.addEventListener(SoundCloudService.UPLOAD_FAILED, uploadFailed);
+		}
+
+		/**
+		 * Stage resize handler, centers UI components
+		 */
+		private function resize(event : Event = null) : void {
+			statusHeader.x = stage.stageWidth / 2 - statusHeader.width / 2;
+			if (statusHeader.x < 0) statusHeader.x = 0;
+			recordButton.x = stage.stageWidth / 2 - recordButton.width / 2;
+			if (recordButton.x < 0) recordButton.x = 0;
+			controlsContainer.x = stage.stageWidth / 2 - controlsContainer.width / 2;
+			if (controlsContainer.x < 0) controlsContainer.x = 0;
 		}
 
 		/**
