@@ -119,7 +119,7 @@ package blazin.miha.soundrecord.components {
 				timer.reset();
 				timer.start();
 			} else {
-				label.text += ".";
+				label.appendText(".");
 			}
 		}
 	}
